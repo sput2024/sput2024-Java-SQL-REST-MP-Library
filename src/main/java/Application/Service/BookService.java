@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * The purpose of a Service class is to contain "business logic" that sits between the web layer (controller) and
  * persistence layer (DAO). That means that the Service class performs tasks that aren't done through the web or
- * SQL: programming tasks like checking that the input is valid, conducting additional security checks, or saving the
+ * SQL: programming tasks like checking that the input is valid, conducting agetCopies_available()dditional security checks, or saving the
  * actions undertaken by the API to a logging file.
  *
  * It's perfectly normal to have Service methods that only contain a single line that calls a DAO method. An
@@ -40,7 +40,7 @@ public class BookService {
      * @return all books.
      */
     public List<Book> getAllBooks() {
-        return null;
+        return bookDAO.getAllBooks();
     }
     /**
      * TODO: Use the bookDAO to persist a book to the database.
@@ -51,7 +51,16 @@ public class BookService {
      * key was already in use.)
      */
     public Book addBook(Book book) {
-
+       // if (bookDAO.getBookByIsbn(book.getIsbn())==null){
+       // if (book.getIsbn(book)=null){
+      //  return null;
+      //  }
+        
+        if (book.getIsbn()>=0 && bookDAO.getBookByIsbn(book.getIsbn())==null){
+                return bookDAO.insertBook(book);
+                }     
+          
+        //else
         return null;
     }
     /**
@@ -59,7 +68,7 @@ public class BookService {
      * @return all available books (bookCount over zero)
      */
     public List<Book> getAllAvailableBooks() {
-        return null;
+        return bookDAO.getBooksWithBookCountOverZero();
     }
 
 }
